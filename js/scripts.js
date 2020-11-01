@@ -101,9 +101,9 @@ $(document).ready(function(){
 
   function insertBtn(){
     $('.candidate-container__btn').append(`
-      <div class="btn-yes"> <img class="btn-img-yes " src="assets/check.png"></div>
-      <div class="btn-skip"> <img class="btn-img-skip" src="assets/skip.png"> </div>
-      <div class="btn-no"> <img class="btn-img-no" src="assets/cross.png"> </div>
+      <div class="btn-yes" role="button"> <img class="btn-img-yes " src="assets/check.png"></div>
+      <div class="btn-skip" role="button"> <img class="btn-img-skip" src="assets/skip.png"> </div>
+      <div class="btn-no" role="button"> <img class="btn-img-no" src="assets/cross.png"> </div>
     `)
   }
 
@@ -117,7 +117,7 @@ $(document).ready(function(){
           <img src="assets/confetti.png">
           <p class="complete-container-text">You've completed all candidate review for this campaign. </p>
           <p class="complete-container-text">TopFunnel will take it from here</p>
-          <button class="bk-btn">Back to Campaigns</button>
+          <button role="button" class="bk-btn">Back to Campaigns</button>
         </section>
       `)
     } else {
@@ -132,20 +132,20 @@ $(document).ready(function(){
           <p class="candidate-header-text candidate-header-summary">${candidates[i].degree} in <span class="candidate-header-summary-hilight">${candidates[i].subject} </span></p> 
           <p class="candidate-header-text candidate-header-summary">Worked at <span class="candidate-header-summary-hilight">${candidates[i].employmentHistory[0].employer}</span>&nbsp;and <span class="candidate-header-summary-hilight">${candidates[i].employmentHistory[0+1].employer}  </span></p> 
           <div class="candidate-header-socialmedia">
-            <img class="candidate-header-socialmedia-gitHub" src="assets/git.png">
-            <img class="candidate-header-socialmedia-linkedin" src="assets/linkedin.png">
+            <a href="https://github.com/ktso11"><img class="candidate-header-socialmedia-gitHub" alt="github thumbnail" src="assets/git.png"></a>
+            <a href="https://www.linkedin.com/in/katie-so/"><img class="candidate-header-socialmedia-linkedin"  alt="linkedin thumbnail" src="assets/linkedin.png"></a>
           </div>
         </header>
       `)
       appendDetails(i)
       $('.candidate-container__card').append(`
-        <footer  class="candidate-container__footer ">
-          <form class="feedback-form">
+        <footer class="candidate-container__footer ">
+          <form class="feedback-form" role="form">
             <p class="feedback-form-title">Feedback</p>
             <textarea class="feedback-form-textarea" placeholder="${candidates[i].name} will be a great fit for this role because..."></textarea>
           </form>
           <section class="candidate-container__contact">
-           <img class="contact-img" src="assets/sourcer.png">
+           <img class="contact-img" alt="recruiter thumbnail" src="assets/sourcer.png">
            <span> &nbsp;Sourced by Jessica </span>
           </section>
         </footer>
@@ -160,7 +160,7 @@ $(document).ready(function(){
       <main class="candidate-container__employment">
         <section class="candidate-employment">
           <div class="candidate-employment__img">
-            <img src="assets/briefcase.png">
+            <img alt="thumbnail of briefcase" src="assets/briefcase.png">
           </div>
           <div class="candidate-employment__content">
             <p class="candidate-employment-position"> ${candidates[j].employmentHistory[i].title}</p>
@@ -226,11 +226,6 @@ $(document).ready(function(){
       $('.candidate-container__btn').removeClass('back-icon-fade')
     } 
   });
- 
-  cards.addEventListener('click', function(event){
-    console.log(event.target.className)
-  })
-
 
   cards.addEventListener('click', function(event){
     if (event.target.className === "campaign-btn"){
@@ -241,7 +236,7 @@ $(document).ready(function(){
       <section class="home-container">
         <img class="tf-logo" src="assets/tf.svg">
         <img class="notification-svg" src="assets/noti-done.svg">
-        <img class="campaign-btn__unactive" src="assets/reviewed.svg">
+        <img role="button" class="campaign-btn__unactive" src="assets/reviewed.svg">
       </section> 
     `)
     }
@@ -279,6 +274,12 @@ $(document).ready(function(){
     $('.candidate-container__card').remove()
     $('.candidate-container').append(`<div class="candidate-container__card"></div>`)
   }
+
+  // Show User's clicks throughout session via console
+
+  cards.addEventListener('click', function(event){
+    console.log(event.target.className)
+  })
 
 });
   
