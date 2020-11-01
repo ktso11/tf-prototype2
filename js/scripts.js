@@ -170,7 +170,7 @@ $(document).ready(function(){
               <span class="candidate-employment-keywords">${candidates[j].employmentHistory[i].keywords[0]}</span>
               <span class="candidate-employment-keywords">${candidates[j].employmentHistory[i].keywords[1]}</span>
               <span class="candidate-employment-keywords">${candidates[j].employmentHistory[i].keywords[2]}</span>
-              <img class="candidate-employment-line" src="assets/line.png">  
+              <img class="candidate-employment-line" src="assets/line2.png">  
             </div>          
           </div>
         </section>
