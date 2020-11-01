@@ -1,0 +1,387 @@
+:root {
+  --white: #FFFFFF;
+  --dark-grey: #373737;
+  --medium-grey: #DDDDDD;
+  --light-grey: #E5E5E5;
+  --header-hilight: #CFD0D8;
+  --default-link-aqua: #36777E;
+  --sm-spacing: 8px;
+  --sm-med-spacing: 16px;
+  --med-spacing: 24px;
+  --med-lrg-spacing: 32px;
+  --lrg-spacing: 40px;
+
+}
+
+* {
+  box-sizing: border-box;
+  /* overflow: hidden; */
+}
+
+body {
+  font-size: 8px;
+  font-family: 'Mulish', sans-serif;
+}
+
+/* Container */
+.frame {
+  height: 812px;
+  width: 375px;
+  border: 15px solid var(--dark-grey);
+  border-radius: 50px;
+  position: fixed;
+  top: 50px;
+  z-index: 10;
+}
+
+.screen {
+  height: 780px;
+  overflow:auto;
+  border-radius: 38px;
+  background-color: var(--white);
+  /* background: linear-gradient(180deg, rgba(229,229,229,1) 25%, rgba(255,255,255,1) 30%); */
+}
+
+.screen-upper {
+  position: fixed;
+  z-index: 9;
+  width: 345px;
+  top: 63px;
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
+  background: linear-gradient(180deg, rgba(229,229,229,1) 60%, rgba(255,0,0,0) 100%);  /* background-image: linear-gradient(to top, rgba(255,0,0,0), rgb(255,255,255)); */
+}
+
+/* Container Icons & Buttons */
+
+.btn-yes, .btn-skip, .btn-no {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100px;
+  height: 80px;
+  width: 80px;
+  z-index: 10;
+}
+
+.btn-yes {
+  background-color: #8BC282;
+}
+
+.btn-yes:active {
+  background-color: #658B5F;
+}
+.btn-skip {
+  background-color: grey;
+  height: 60px;
+  width: 60px;
+  margin: 0 20px;
+}
+
+.btn-skip:active {
+  background-color: #92929A;
+}
+
+.btn-no {
+  background-color: #F46A6A;
+}
+
+.btn-no:active {
+  background-color: #C55656;
+}
+
+.candidate-container__btn{
+  width:375px;
+  position: absolute;
+  top: 670px;
+  width: 100%;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  opacity: 1;
+  transition: opacity .3s ease-in-out;
+}
+
+
+/* Card */
+
+
+.candidate-container {
+  position: relative;
+  transition: 1s;
+  background-color: var(--white);
+}
+
+
+.candidate-container__card{
+  position: absolute;
+  right: 0;
+  left: 0;
+  border: 1px solid var(--light-grey);
+  border-bottom: none;
+  background-color: var(--white);
+}
+
+
+
+
+/* Card Header */
+.candidate-header-text {
+  margin: 0 0;
+}
+
+.candidate-header-name {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.candidate-header-position{
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 40px;
+}
+
+.candidate-header-summary {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.candidate-header-summary-hilight {
+  background-color: var(--header-hilight);
+  border-radius: 50px;
+  padding: 2px 8px;
+  font-weight: 600;
+}
+
+.candidate-header-socialmedia {
+  margin-top: var(--med-spacing);
+  width: 100%;
+  text-align: right;
+}
+
+.candidate-header-socialmedia img{
+  height: 40px;
+  width: 40px;
+  margin-right: var(--sm-med-spacing);
+}
+
+.candidate-container__header {
+  border-bottom-right-radius: 24px;
+  border-bottom-left-radius: 24px;
+  padding: 20px 20px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  margin-bottom: var(--sm-med-spacing);
+  background-color: var(--light-grey);
+  padding-top: 130px;
+}
+
+/* Card - Employment Section */
+
+.candidate-container__employment, .candidate-container__footer {
+  font-size: 16px;
+}
+
+.candidate-employment__img {
+  background-image: url('../assets/timeline.png');
+  background-size: cover;
+  margin-left: var(--sm-med-spacing);
+}
+
+.candidate-employment__img img{
+  height: 30px;
+  width:auto;
+}
+
+.candidate-employment {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  background-color: white;
+}
+
+.candidate-employment-position, .candidate-employment-summary {
+  margin: 0;
+}
+
+.candidate-employment__content{
+  padding-left: var(--sm-spacing);
+}
+
+.candidate-employment-position {
+  font-weight:700;
+}
+
+.candidate-employment__keywords-container {
+  padding-bottom: var(--med-spacing);
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.candidate-employment-keywords {
+  background-color: #B8E7EB;
+  border-radius: 50px;
+  padding: 2px 8px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  margin-right: 2px;
+}
+
+.candidate-employment-line {
+  width: 90%;
+  margin-top: 16px;
+}
+
+.candidate-employment__content p {
+  margin-bottom: 2px;
+}
+
+
+/* Footer FORM */
+
+.feedback-form-textarea {
+  width: 100%;
+  height: 100px;
+  border: 1px solid var(--medium-grey);
+  border-radius: 10px;
+  resize: none;
+  font-size: 16px;
+  padding: 10px;
+  font-family: 'Mulish', sans-serif;
+}
+
+.feedback-form {
+  margin: 10px;
+}
+.feedback-form-title {
+  margin-left: var(--sm-spacing);
+  margin-bottom: var(--sm-spacing);
+  font-weight: 700;
+}
+
+.feedback-form-textarea::placeholder {
+  color: var(--medium-grey);
+  font-size: 16px;
+}
+
+/* Footer SOURCER */
+
+.candidate-container__contact{
+  background-color: var(--medium-grey);
+  padding-top: 24px;
+  padding-bottom: 150px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: var(--dark-grey);
+}
+
+.contact-img {
+  height: 40px;
+  width: 40px;
+}
+
+/* Complete Screen */
+
+.complete-container {
+  height: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  text-align: center;
+  background-color: var(--light-grey);
+}
+
+.complete-container img {
+  height: 60px;
+  width: auto;
+}
+
+.complete-container-text {
+  font-size: 16px;
+}
+
+.complete-container-text:nth-child(2) {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.bk-btn{
+  width: 300px;
+  border-radius: 50px;
+  background-color: var(--default-link-aqua);
+  color: var(--white);
+  border: none;
+  padding: 16px 20px;
+  font-size: 16px;
+  margin-top: var(--med-spacing);
+  letter-spacing: 1px;
+  outline: none;
+}
+
+.back-icon:hover{
+  background-color: #4CA5AE;
+}
+
+/* Home View*/
+
+.tf-logo {
+  top: 50px;
+  left: 120px;
+  position: absolute; 
+}
+
+.notification-svg {
+  top: 110px;
+  width: 90%; 
+  left: 16px;
+  height: auto;
+  position: absolute; 
+}
+
+.campaign-btn {
+  top: 250px;
+  width: 355px;
+  position: absolute; 
+}
+
+.campaign-btn__unactive {
+  top: 250px;
+  width: 355px;
+  position: absolute; 
+}
+
+/* transitions */
+
+.candidate-card__slideleft {
+  transition: 1.5s;
+  left: -900;
+  right: auto;
+}
+
+.candidate-card__slideright {
+  transition: 1.5s;
+  right: -900;
+  left:auto;
+}
+
+.back-icon{
+  height: 24px;
+  width: 24px;
+  top: 20px;
+  left: 8px;
+  position: relative;
+  opacity: 1;
+  transition: opacity .3s ease-in-out;
+}
+
+.back-icon-fade {
+  opacity: 0;
+  transition: opacity .3s ease-in-out;
+}
+
