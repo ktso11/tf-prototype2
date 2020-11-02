@@ -207,7 +207,6 @@ $(document).ready(function(){
   btnContainer.addEventListener('click', function(event) {
     let getIndex = document.getElementsByClassName('candidate-container__header')
     let index = getIndex[0].id
-    console.log(candidates)
     if(click === candidates.length) {
       //When out of candidates 
       $('.candidate-container__btn').remove()
