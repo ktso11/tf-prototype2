@@ -109,7 +109,7 @@ $(document).ready(function(){
 
   function appendCard(i){
     if(i === candidates.length) {
-      console.log("do nothing")
+      // When no candidates available
       $('.candidate-container__btn').addClass('back-icon-fade')
       $('.candidate-container').append(`<div class="candidate-container__card"></div>`)
       $('.candidate-container__card').append(`
@@ -154,9 +154,8 @@ $(document).ready(function(){
   }
 
   function appendDetails(j){
-    for(i=0; i<candidates.length;i++){
+    for(i=0; i<candidates[j].employmentHistory.length;i++){
       $('.candidate-container__card' ).append(`
-      
       <main class="candidate-container__employment">
         <section class="candidate-employment">
           <div class="candidate-employment__img">
@@ -189,6 +188,7 @@ $(document).ready(function(){
   })
 
   function intEffect(move, currentIndex){
+    click = click +1
     $('.a'+currentIndex).css('z-index',"5")
     appendCard(click)
     $('.a'+currentIndex).addClass('candidate-card__slide'+move)
@@ -199,6 +199,7 @@ $(document).ready(function(){
     }, 800);
   }
 
+
   //Decison Logic (based on user decision to Accept, Reject or Skip)
 
   let click = 0 //count to ensure all candidates are reviewed, and prevent repeats
@@ -207,23 +208,22 @@ $(document).ready(function(){
     let getIndex = document.getElementsByClassName('candidate-container__header')
     let index = getIndex[0].id
     if(click === candidates.length) {
-      console.log(click+ "... out of candidates")
+      //When out of candidates 
       $('.candidate-container__btn').remove()
     }
     if(click < candidates.length && event.target.className === "btn-yes"){
       acceptedCandidates.push(candidates[index].name)
-      click = click + 1
       intEffect("right", index)
     }  
     if(click < candidates.length && event.target.className === "btn-no"){
       rejectedCandidates.push(candidates[index])
-      click = click + 1
       intEffect("left",index)
     } 
     if(click < candidates.length && event.target.className === "btn-skip"){
-      candidates.push(candidates.splice(index, 1)[0]); //remove and move to end of arr
-      appendCard(click)
-      $('.candidate-container__btn').removeClass('back-icon-fade')
+      // candidates.push(candidates.splice(index, 1)[0]); //remove and move to end of arr
+      candidates.push(candidates[index]);
+      intEffect("left",index)
+      $('.candidate-container__btn').removeClass('back-icon-fade') //to avoid buttons hide when counter reached
     } 
   });
 
