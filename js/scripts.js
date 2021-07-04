@@ -101,9 +101,9 @@ $(document).ready(function(){
 
   function insertBtn(){
     $('.candidate-container__btn').append(`
-      <div class="btn-yes" role="button"> <img class="btn-img-yes " src="assets/check.png"></div>
-      <div class="btn-skip" role="button"> <img class="btn-img-skip" src="assets/skip.png"> </div>
-      <div class="btn-no" role="button"> <img class="btn-img-no" src="assets/cross.png"> </div>
+      <div class="btn-yes" id="click-yes" role="button"> <img id="click-yes" class="btn-img-yes " src="assets/check.png"></div>
+      <div class="btn-skip" id="click-skip" role="button"> <img id="click-skip"  class="btn-img-skip" src="assets/skip.png"> </div>
+      <div class="btn-no " id="click-no" role="button"> <img id="click-no" class="btn-img-no click-no" src="assets/cross.png"> </div>
     `)
   }
 
@@ -211,15 +211,16 @@ $(document).ready(function(){
       //When out of candidates 
       $('.candidate-container__btn').remove()
     }
-    if(click < candidates.length && event.target.className === "btn-yes"){
+    if(click < candidates.length && event.target.id === "click-yes"){
       acceptedCandidates.push(candidates[index].name)
       intEffect("right", index)
     }  
-    if(click < candidates.length && event.target.className === "btn-no"){
+    if(click < candidates.length && event.target.id === "click-no"){
+    
       rejectedCandidates.push(candidates[index])
       intEffect("left",index)
     } 
-    if(click < candidates.length && event.target.className === "btn-skip"){
+    if(click < candidates.length && event.target.id === "click-skip"){
       // candidates.push(candidates.splice(index, 1)[0]); //remove and move to end of arr
       candidates.push(candidates[index]);
       intEffect("left",index)
