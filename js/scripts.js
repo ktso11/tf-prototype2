@@ -79,7 +79,7 @@ $(document).ready(function(){
         title: 'Developer',
         employer: 'Microsoft',
         dates: 'Jun 2013 to Present',
-        keywords: ["Javascript", "CSS", "Jquery"]
+        keywords: ["Javascript", "CSS", "Jquery", "React"]
       },
       {
         title: 'Software Engineer',
@@ -88,9 +88,15 @@ $(document).ready(function(){
         keywords: ["Javascript", "CSS", "Jquery"]
       },
       {
+      title: 'Developer',
+      employer: 'Microsoft',
+      dates: 'Jun 2010 to Feb 2010',
+      keywords: ["Javascript", "CSS", "Jquery"]
+      },
+      {
         title: 'Intern',
         employer: 'Twitter',
-        dates: 'Jun 2007 to Jun 2010',
+        dates: 'Jun 2007 to Feb 2010',
         keywords: ["Docker", "Java", "Jquery"]
       }]
     }
@@ -137,7 +143,7 @@ $(document).ready(function(){
           </div>
         </header>
       `)
-      appendDetails(i)
+      setTimeout(appendDetails(i), 5000)
       $('.candidate-container__card').append(`
         <footer class="candidate-container__footer ">
           <form class="feedback-form" role="form">
@@ -165,17 +171,37 @@ $(document).ready(function(){
             <p class="candidate-employment-position"> ${candidates[j].employmentHistory[i].title}</p>
             <p class="candidate-employment-summary"> ${candidates[j].employmentHistory[i].employer}</p>
             <p class="candidate-employment-summary"> ${candidates[j].employmentHistory[i].dates}</p>
-            <div class="candidate-employment__keywords-container"> 
-              <span class="candidate-employment-keywords">${candidates[j].employmentHistory[i].keywords[0]}</span>
-              <span class="candidate-employment-keywords">${candidates[j].employmentHistory[i].keywords[1]}</span>
-              <span class="candidate-employment-keywords">${candidates[j].employmentHistory[i].keywords[2]}</span>
-              <img class="candidate-employment-line" src="assets/line2.png">  
-            </div>          
-          </div>
-        </section>
-      </main> 
-    `)
+            <div class="candidate-employment__keywords-container keyword-` + j +`-`+i+`">
+                <img class="candidate-employment-line" src="assets/line2.png">  
+              </div>          
+            </div>
+          </section>
+        </main> 
+      `)
+      console.log("for candidate " +j+" there are " +i+ " employment listed")
+      // setTimeout(appendKeywords(j, i), 10)
     }
+
+  }
+
+  // <span class="candidate-employment-keywords">${candidates[j].employmentHistory[i].keywords[0]}</span>
+  // <span class="candidate-employment-keywords">${candidates[j].employmentHistory[i].keywords[1]}</span>
+  // <span class="candidate-employment-keywords">${candidates[j].employmentHistory[i].keywords[2]}</span>
+
+
+  function appendKeywords(profileIndex, workIndex) {
+    console.log('keyword-'+profileIndex +'-'+workIndex)
+    // console.log(candidates[profileIndex].employmentHistory[workIndex].keywords.length)
+    for(i=0; i<candidates[profileIndex].employmentHistory[workIndex].keywords.length; i++){
+      // console.log('keyword-'+profileIndex +'-'+workIndex)
+
+      $('.keyword-'+profileIndex +'-'+workIndex).append(` 
+        <span class="candidate-employment-keywords">${candidates[profileIndex].employmentHistory[workIndex].keywords[i]}</span>
+      `)
+      console.log("I is : " + i)
+
+    }
+
   }
 
 //Animations/Interactions
