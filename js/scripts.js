@@ -105,6 +105,7 @@ $(document).ready(function(){
   appendCard()
 
   function appendCard(index = 0){
+    console.log("candidate length is: "+ candidates.length + " and index is: "+index)
     if(candidates.length === index) {
       // When no candidates available
       $('.candidate-container__btn').addClass('back-icon-fade')
@@ -120,7 +121,7 @@ $(document).ready(function(){
     } else {
       const candidate = candidates[index];
       const getHistory = appendDetails(candidate.employmentHistory)
-      $('.candidate-container').append(`<div class="candidate-container__card a${index}"></div>`)
+      $('.candidate-container').append(`<div class="candidate-container__card card-${index}"></div>`)
       $('.candidate-container__card').append(`
       <header id="${index}" class="candidate-container__header ">
           <p class="candidate-header-text candidate-header-name"> ${candidate.name} </p>
@@ -216,23 +217,27 @@ $(document).ready(function(){
     }
   })
 
+  let click = 0 //count to ensure all candidates are reviewed, and prevent repeats
+  // when check/cross/pass buttons are clicked, click count incredments
+  // assign zindex to current card to ensure new card appended is at the button
+  // apply css to slide card to review new card
+  // remove old card completely from UI 
+
   function intEffect(move, currentIndex){
     click = click +1
-    $('.a'+currentIndex).css('z-index',"5")
+    $('.card-'+currentIndex).css('z-index',"5")
     appendCard(click)
-    $('.a'+currentIndex).addClass('candidate-card__slide'+move)
+    $('.card-'+currentIndex).addClass('candidate-card__slide'+move)
     setTimeout(function() {
-      $('.a'+currentIndex).remove()
-      setTimeout(function() {
-     }, 100);
-    }, 800);
+      $('.card-'+currentIndex).remove()
+    //   setTimeout(function() {
+    //  }, 100);
+    }, 500);
   }
 
-  //Decison Logic (based on user decision to Accept, Reject or Skip)
-
-  let click = 0 //count to ensure all candidates are reviewed, and prevent repeats
-
+  //Decison Logic (based on user decision to Accept, Reject or Skip)  
   btnContainer.addEventListener('click', function(event) {
+    //find the index of the card in display
     let getIndex = document.getElementsByClassName('candidate-container__header')
     let index = getIndex[0].id
     if(click === candidates.length) {
@@ -244,14 +249,14 @@ $(document).ready(function(){
       intEffect("right", index)
     }  
     if(click < candidates.length && event.target.id === "click-no"){
-      rejectedCandidates.push(candidates[index])
+      rejectedCandidates.push(candidates[index].name)
       intEffect("left",index)
     } 
     if(click < candidates.length && event.target.id === "click-skip"){
-      // candidates.push(candidates.splice(index, 1)[0]); //remove and move to end of arr
+      //move to end of arr 
       candidates.push(candidates[index]);
       intEffect("left",index)
-      $('.candidate-container__btn').removeClass('back-icon-fade') //to avoid buttons hide when counter reached
+      // $('.candidate-container__btn').removeClass('back-icon-fade') //to avoid buttons hide when counter reached
     } 
   });
 
@@ -307,7 +312,10 @@ $(document).ready(function(){
 
   cards.addEventListener('click', function(event){
     console.log(event.target.className)
+    console.log(acceptedCandidates)
+    console.log(rejectedCandidates)
   })
+
 
 });
   
