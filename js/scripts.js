@@ -24,7 +24,7 @@ $(document).ready(function(){
         keywords: ["C++", "CSS", "Java", "react"]
       },
       {
-        title: 'Software Engineer',
+        title: 'Cook',
         employer: 'Facebook',
         dates: 'Jun 2010 to Jun 2013',
         keywords: ["HTML", "CSS", "UX"]
@@ -53,7 +53,7 @@ $(document).ready(function(){
         keywords: ["Java", "Docker", "React"]
       },
       {
-        title: 'Software Engineer',
+        title: 'Volunteer',
         employer: 'Facebook',
         dates: 'Jun 2010 to Jun 2013',
         keywords: ["Javascript", "CSS", "Jquery"]
@@ -76,10 +76,10 @@ $(document).ready(function(){
       degree: 'Bachelors',
       workedFor: ['Microsoft', 'Linkedin'],
       employmentHistory: [{
-        title: 'Developer',
+        title: 'Janitor',
         employer: 'Microsoft',
         dates: 'Jun 2013 to Present',
-        keywords: ["Javascript", "CSS", "Jquery", "React"]
+        keywords: ["Javascript", "CSS", "Jquery", "React", "Sass", "Angular"]
       },
       {
         title: 'Software Engineer',
@@ -103,11 +103,8 @@ $(document).ready(function(){
   ];
   
   appendCard()
-//put buttons in html
 
-//refactor candidates[i]
   function appendCard(index = 0){
-    const candidate = candidates[index];
     if(candidates.length === index) {
       // When no candidates available
       $('.candidate-container__btn').addClass('back-icon-fade')
@@ -121,6 +118,8 @@ $(document).ready(function(){
         </section>
       `)
     } else {
+      const candidate = candidates[index];
+      const getHistory = appendDetails(candidate.employmentHistory)
       $('.candidate-container').append(`<div class="candidate-container__card a${index}"></div>`)
       $('.candidate-container__card').append(`
       <header id="${index}" class="candidate-container__header ">
@@ -137,10 +136,7 @@ $(document).ready(function(){
             <a href="https://www.linkedin.com/in/katie-so/"><img class="candidate-header-socialmedia-linkedin"  alt="linkedin thumbnail" src="assets/linkedin.png"></a>
           </div>
         </header>
-      `)
-      //appdetails as variable
-      appendDetails(candidate)
-      $('.candidate-container__card').append(`
+        ${getHistory}
         <footer class="candidate-container__footer ">
           <form class="feedback-form" role="form">
             <p class="feedback-form-title">Feedback</p>
@@ -155,35 +151,61 @@ $(document).ready(function(){
     }
   }
 
-  //change to map
-  function appendDetails(currentCandidate){
-    for(i=0; i<currentCandidate.employmentHistory.length;i++){
-      const history = currentCandidate.employmentHistory[i]; //access the ram one time only 
-      const keywords = appendKeywords(history.keywords)
-      $('.candidate-container__card' ).append(`
-      <main class="candidate-container__employment">
-        <section class="candidate-employment">
-          <div class="candidate-employment__img">
-            <img alt="thumbnail of briefcase" src="assets/briefcase.png">
-          </div>
-          <div class="candidate-employment__content">
-            <p class="candidate-employment-position"> ${history.title}</p>
-            <p class="candidate-employment-summary"> ${history.employer}</p>
-            <p class="candidate-employment-summary"> ${history.dates}</p>
-            <div class="candidate-employment__keywords-container">
-            ${keywords}
-                <img class="candidate-employment-line" src="assets/line2.png">
-              </div>          
-            </div>
-          </section>
-        </main> 
-      `)
-    }
+  // change to map
+  function appendDetails(employment){
+    return  employment.map((el) => {
+      const keywords = appendKeywords(el.keywords)
+      return (
+        `<main class="candidate-container__employment">
+            <section class="candidate-employment">
+              <div class="candidate-employment__img">
+                <img alt="thumbnail of briefcase" src="assets/briefcase.png">
+              </div>
+              <div class="candidate-employment__content">
+                <p class="candidate-employment-position"> ${el.title}</p>
+                <p class="candidate-employment-summary"> ${el.employer}</p>
+                <p class="candidate-employment-summary"> ${el.dates}</p>
+                <div class="candidate-employment__keywords-container">
+                  ${keywords}
+                  <img class="candidate-employment-line" src="assets/line2.png">
+                </div>          
+              </div>
+            </section>
+          </main>`
+        )
+    })
   }
 
   function appendKeywords(keywords) {
     return keywords.map((el) => (`<span class="candidate-employment-keywords">${el}</span>`)).join('');
   }
+
+  // function appendDetails(currentCandidate){
+  //   for(i=0; i<currentCandidate.employmentHistory.length;i++){
+  //     const history = currentCandidate.employmentHistory[i]; //access the ram one time only 
+  //     const keywords = appendKeywords(history.keywords)
+  //     $('.candidate-container__card' ).append(`
+  //     <main class="candidate-container__employment">
+  //       <section class="candidate-employment">
+  //         <div class="candidate-employment__img">
+  //           <img alt="thumbnail of briefcase" src="assets/briefcase.png">
+  //         </div>
+  //         <div class="candidate-employment__content">
+  //           <p class="candidate-employment-position"> ${history.title}</p>
+  //           <p class="candidate-employment-summary"> ${history.employer}</p>
+  //           <p class="candidate-employment-summary"> ${history.dates}</p>
+  //           <div class="candidate-employment__keywords-container">
+  //             ${keywords}
+  //             <img class="candidate-employment-line" src="assets/line2.png">
+  //           </div>          
+  //         </div>
+  //       </section>
+  //     </main> 
+  //     `)
+  //   }
+  // }
+
+
 
 //Animations/Interactions
   $('.screen').on('scroll', function(){
@@ -222,7 +244,6 @@ $(document).ready(function(){
       intEffect("right", index)
     }  
     if(click < candidates.length && event.target.id === "click-no"){
-    
       rejectedCandidates.push(candidates[index])
       intEffect("left",index)
     } 
