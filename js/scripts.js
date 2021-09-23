@@ -21,7 +21,7 @@ $(document).ready(function(){
         title: 'Developer',
         employer: 'Google',
         dates: 'Jun 2013 to Present',
-        keywords: ["C++", "CSS", "Java", "react"]
+        keywords: ["C++", "CSS", "Java", "react", "Design System", "UI", "Prototype"]
       },
       {
         title: 'Cook',
@@ -152,7 +152,6 @@ $(document).ready(function(){
     }
   }
 
-  // change to map
   function appendDetails(employment){
     return  employment.map((el) => {
       const keywords = appendKeywords(el.keywords)
@@ -241,7 +240,7 @@ $(document).ready(function(){
     let getIndex = document.getElementsByClassName('candidate-container__header')
     let index = getIndex[0].id
     if(click === candidates.length) {
-      //When out of candidates 
+      //When out of candidates, remove buttons 
       $('.candidate-container__btn').hide()
     }
     if(click < candidates.length && event.target.id === "click-yes"){
