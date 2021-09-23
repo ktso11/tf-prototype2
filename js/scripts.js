@@ -21,7 +21,7 @@ $(document).ready(function(){
         title: 'Developer',
         employer: 'Google',
         dates: 'Jun 2013 to Present',
-        keywords: ["C++", "CSS", "Java"]
+        keywords: ["C++", "CSS", "Java", "react"]
       },
       {
         title: 'Software Engineer',
@@ -88,10 +88,10 @@ $(document).ready(function(){
         keywords: ["Javascript", "CSS", "Jquery"]
       },
       {
-      title: 'Developer',
-      employer: 'Microsoft',
-      dates: 'Jun 2010 to Feb 2010',
-      keywords: ["Javascript", "CSS", "Jquery"]
+        title: 'Developer',
+        employer: 'Microsoft',
+        dates: 'Jun 2010 to Feb 2010',
+        keywords: ["Javascript", "CSS", "Jquery"]
       },
       {
         title: 'Intern',
@@ -102,19 +102,13 @@ $(document).ready(function(){
     }
   ];
   
-  insertBtn()
-  appendCard(0)
+  appendCard()
+//put buttons in html
 
-  function insertBtn(){
-    $('.candidate-container__btn').append(`
-      <div class="btn-yes" id="click-yes" role="button"> <img id="click-yes" class="btn-img-yes " src="assets/check.png"></div>
-      <div class="btn-skip" id="click-skip" role="button"> <img id="click-skip"  class="btn-img-skip" src="assets/skip.png"> </div>
-      <div class="btn-no " id="click-no" role="button"> <img id="click-no" class="btn-img-no click-no" src="assets/cross.png"> </div>
-    `)
-  }
-
-  function appendCard(i){
-    if(i === candidates.length) {
+//refactor candidates[i]
+  function appendCard(index = 0){
+    const candidate = candidates[index];
+    if(candidates.length === index) {
       // When no candidates available
       $('.candidate-container__btn').addClass('back-icon-fade')
       $('.candidate-container').append(`<div class="candidate-container__card"></div>`)
@@ -127,28 +121,30 @@ $(document).ready(function(){
         </section>
       `)
     } else {
-      $('.candidate-container').append(`<div class="candidate-container__card a${i}"></div>`)
+      $('.candidate-container').append(`<div class="candidate-container__card a${index}"></div>`)
       $('.candidate-container__card').append(`
-      <header id="${i}" class="candidate-container__header ">
-          <p class="candidate-header-text candidate-header-name"> ${candidates[i].name} </p>
-          <p class="candidate-header-text candidate-header-position"> ${candidates[i].currentTitle} at ${candidates[i].currentEmployer}</p>
-          <p class="candidate-header-text candidate-header-summary"> <img class="-header-img-locationmarker" src="assets/locationmarker.png"> ${candidates[i].location}</p>
-          <p class="candidate-header-text candidate-header-summary">Years of Experience <span class="candidate-header-summary-hilight">${candidates[i].yearsExperience} </span></p> 
-          <p class="candidate-header-text candidate-header-summary">Attended <span class="candidate-header-summary-hilight">${candidates[i].school} </span></p> 
-          <p class="candidate-header-text candidate-header-summary">${candidates[i].degree} in <span class="candidate-header-summary-hilight">${candidates[i].subject} </span></p> 
-          <p class="candidate-header-text candidate-header-summary">Worked at <span class="candidate-header-summary-hilight">${candidates[i].employmentHistory[0].employer}</span>&nbsp;and <span class="candidate-header-summary-hilight">${candidates[i].employmentHistory[0+1].employer}  </span></p> 
+      <header id="${index}" class="candidate-container__header ">
+          <p class="candidate-header-text candidate-header-name"> ${candidate.name} </p>
+          <p class="candidate-header-text candidate-header-position"> ${candidate.currentTitle} at ${candidate.currentEmployer}</p>
+          <p class="candidate-header-text candidate-header-summary"> <img class="-header-img-locationmarker" src="assets/locationmarker.png"> ${candidate.location}</p>
+          <p class="candidate-header-text candidate-header-summary">Years of Experience <span class="candidate-header-summary-hilight">${candidate.yearsExperience} </span></p> 
+          <p class="candidate-header-text candidate-header-summary">Attended <span class="candidate-header-summary-hilight">${candidate.school} </span></p> 
+          <p class="candidate-header-text candidate-header-summary">${candidate.degree} in <span class="candidate-header-summary-hilight">${candidate.subject} </span></p> 
+          <p class="candidate-header-text candidate-header-summary">Worked at <span class="candidate-header-summary-hilight">${candidate.employmentHistory[0].employer}</span>&nbsp;and
+          <span class="candidate-header-summary-hilight">${candidate.employmentHistory[1].employer} </span></p> 
           <div class="candidate-header-socialmedia">
             <a href="https://github.com/ktso11"><img class="candidate-header-socialmedia-gitHub" alt="github thumbnail" src="assets/git.png"></a>
             <a href="https://www.linkedin.com/in/katie-so/"><img class="candidate-header-socialmedia-linkedin"  alt="linkedin thumbnail" src="assets/linkedin.png"></a>
           </div>
         </header>
       `)
-      setTimeout(appendDetails(i), 5000)
+      //appdetails as variable
+      appendDetails(candidate)
       $('.candidate-container__card').append(`
         <footer class="candidate-container__footer ">
           <form class="feedback-form" role="form">
             <p class="feedback-form-title">Feedback</p>
-            <textarea class="feedback-form-textarea" placeholder="${candidates[i].name} will be a great fit for this role because..."></textarea>
+            <textarea class="feedback-form-textarea" placeholder="${candidate.name} will be a great fit for this role because..."></textarea>
           </form>
           <section class="candidate-container__contact">
            <img class="contact-img" alt="recruiter thumbnail" src="assets/sourcer.png">
@@ -159,8 +155,11 @@ $(document).ready(function(){
     }
   }
 
-  function appendDetails(j){
-    for(i=0; i<candidates[j].employmentHistory.length;i++){
+  //change to map
+  function appendDetails(currentCandidate){
+    for(i=0; i<currentCandidate.employmentHistory.length;i++){
+      const history = currentCandidate.employmentHistory[i]; //access the ram one time only 
+      const keywords = appendKeywords(history.keywords)
       $('.candidate-container__card' ).append(`
       <main class="candidate-container__employment">
         <section class="candidate-employment">
@@ -168,40 +167,22 @@ $(document).ready(function(){
             <img alt="thumbnail of briefcase" src="assets/briefcase.png">
           </div>
           <div class="candidate-employment__content">
-            <p class="candidate-employment-position"> ${candidates[j].employmentHistory[i].title}</p>
-            <p class="candidate-employment-summary"> ${candidates[j].employmentHistory[i].employer}</p>
-            <p class="candidate-employment-summary"> ${candidates[j].employmentHistory[i].dates}</p>
-            <div class="candidate-employment__keywords-container keyword-` + j +`-`+i+`">
-                <img class="candidate-employment-line" src="assets/line2.png">  
+            <p class="candidate-employment-position"> ${history.title}</p>
+            <p class="candidate-employment-summary"> ${history.employer}</p>
+            <p class="candidate-employment-summary"> ${history.dates}</p>
+            <div class="candidate-employment__keywords-container">
+            ${keywords}
+                <img class="candidate-employment-line" src="assets/line2.png">
               </div>          
             </div>
           </section>
         </main> 
       `)
-      console.log("for candidate " +j+" there are " +i+ " employment listed")
-      // setTimeout(appendKeywords(j, i), 10)
     }
-
   }
 
-  // <span class="candidate-employment-keywords">${candidates[j].employmentHistory[i].keywords[0]}</span>
-  // <span class="candidate-employment-keywords">${candidates[j].employmentHistory[i].keywords[1]}</span>
-  // <span class="candidate-employment-keywords">${candidates[j].employmentHistory[i].keywords[2]}</span>
-
-
-  function appendKeywords(profileIndex, workIndex) {
-    console.log('keyword-'+profileIndex +'-'+workIndex)
-    // console.log(candidates[profileIndex].employmentHistory[workIndex].keywords.length)
-    for(i=0; i<candidates[profileIndex].employmentHistory[workIndex].keywords.length; i++){
-      // console.log('keyword-'+profileIndex +'-'+workIndex)
-
-      $('.keyword-'+profileIndex +'-'+workIndex).append(` 
-        <span class="candidate-employment-keywords">${candidates[profileIndex].employmentHistory[workIndex].keywords[i]}</span>
-      `)
-      console.log("I is : " + i)
-
-    }
-
+  function appendKeywords(keywords) {
+    return keywords.map((el) => (`<span class="candidate-employment-keywords">${el}</span>`)).join('');
   }
 
 //Animations/Interactions
@@ -225,7 +206,6 @@ $(document).ready(function(){
     }, 800);
   }
 
-
   //Decison Logic (based on user decision to Accept, Reject or Skip)
 
   let click = 0 //count to ensure all candidates are reviewed, and prevent repeats
@@ -235,7 +215,7 @@ $(document).ready(function(){
     let index = getIndex[0].id
     if(click === candidates.length) {
       //When out of candidates 
-      $('.candidate-container__btn').remove()
+      $('.candidate-container__btn').hide()
     }
     if(click < candidates.length && event.target.id === "click-yes"){
       acceptedCandidates.push(candidates[index].name)
