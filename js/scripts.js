@@ -103,6 +103,7 @@ $(document).ready(function(){
   ];
   
   appendCard()
+  // $('.user-menu').hide('')
 
   function appendCard(index = 0){
     console.log("candidate length is: "+ candidates.length + " and index is: "+index)
@@ -216,7 +217,8 @@ $(document).ready(function(){
     }
   })
 
-  let click = 0 //count to ensure all candidates are reviewed, and prevent repeats
+  let click = 0 
+  //count to ensure all candidates are reviewed, and prevent repeats
   // when check/cross/pass buttons are clicked, click count incredments
   // assign zindex to current card to ensure new card appended is at the button
   // apply css to slide card to review new card
@@ -229,6 +231,7 @@ $(document).ready(function(){
     $('.card-'+currentIndex).addClass('candidate-card__slide'+move)
     setTimeout(function() {
       $('.card-'+currentIndex).remove()
+    // why did i have this?...
     //   setTimeout(function() {
     //  }, 100);
     }, 500);
@@ -293,6 +296,8 @@ $(document).ready(function(){
   function closeHome(){
     document.getElementById('nav-btn').src="assets/backicon.png"
     navToggle = 0
+    console.log("clicked on hamburger")
+    // $('.user-menu').addClass('menu__slideright')
     $('.candidate-container__card').remove()
     $('.candidate-container__btn').removeClass('back-icon-fade')
     appendCard(0)
@@ -302,17 +307,15 @@ $(document).ready(function(){
   function openHome(){
     document.getElementById('nav-btn').src="assets/hamburger.png"
     navToggle = true
+    // $('.user-menu').removeClass('menu__slideright', 500)
     $('.candidate-container__btn').addClass('back-icon-fade')
     $('.candidate-container__card').remove()
     $('.candidate-container').append(`<div class="candidate-container__card"></div>`)
   }
 
-  // Show User's clicks throughout session via console
-
+  // Show User's clicks throughout session 
   cards.addEventListener('click', function(event){
-    console.log(event.target.className)
-    console.log(acceptedCandidates)
-    console.log(rejectedCandidates)
+    $('.results').append(`User clicked on "${event.target.className}". <br>`)
   })
 
 
