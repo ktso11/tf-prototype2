@@ -399,7 +399,7 @@ body {
 
 }
 .menu__slideright {
-  transition: 2s;
+  transition: 1s;
   left: 0;
   right: auto;
 }

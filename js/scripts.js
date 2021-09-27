@@ -1,3 +1,7 @@
+const appendKeywords = (keywords) => {
+  return keywords.map((el) => (`<span class="candidate-employment-keywords">${el}</span>`)).join('');
+}
+
 $(document).ready(function(){
 
   let cards = document.querySelector('.candidate-container')
@@ -103,10 +107,11 @@ $(document).ready(function(){
   ];
   
   appendCard()
+
+
   // $('.user-menu').hide('')
 
   function appendCard(index = 0){
-    console.log("candidate length is: "+ candidates.length + " and index is: "+index)
     if(candidates.length === index) {
       // When no candidates available
       $('.candidate-container__btn').addClass('back-icon-fade')
@@ -122,36 +127,48 @@ $(document).ready(function(){
     } else {
       const candidate = candidates[index];
       const getHistory = appendDetails(candidate.employmentHistory)
-      $('.candidate-container').append(`<div class="candidate-container__card card-${index}"></div>`)
-      $('.candidate-container__card').append(`
-      <header id="${index}" class="candidate-container__header ">
-          <p class="candidate-header-text candidate-header-name"> ${candidate.name} </p>
-          <p class="candidate-header-text candidate-header-position"> ${candidate.currentTitle} at ${candidate.currentEmployer}</p>
-          <p class="candidate-header-text candidate-header-summary"> <img class="-header-img-locationmarker" src="assets/locationmarker.png"> ${candidate.location}</p>
-          <p class="candidate-header-text candidate-header-summary">Years of Experience <span class="candidate-header-summary-hilight">${candidate.yearsExperience} </span></p> 
-          <p class="candidate-header-text candidate-header-summary">Attended <span class="candidate-header-summary-hilight">${candidate.school} </span></p> 
-          <p class="candidate-header-text candidate-header-summary">${candidate.degree} in <span class="candidate-header-summary-hilight">${candidate.subject} </span></p> 
-          <p class="candidate-header-text candidate-header-summary">Worked at <span class="candidate-header-summary-hilight">${candidate.employmentHistory[0].employer}</span>&nbsp;and
-          <span class="candidate-header-summary-hilight">${candidate.employmentHistory[1].employer} </span></p> 
-          <div class="candidate-header-socialmedia">
-            <a href="https://github.com/ktso11"><img class="candidate-header-socialmedia-gitHub" alt="github thumbnail" src="assets/git.png"></a>
-            <a href="https://www.linkedin.com/in/katie-so/"><img class="candidate-header-socialmedia-linkedin"  alt="linkedin thumbnail" src="assets/linkedin.png"></a>
-          </div>
-        </header>
-        ${getHistory}
-        <footer class="candidate-container__footer ">
-          <form class="feedback-form" role="form">
-            <p class="feedback-form-title">Feedback</p>
-            <textarea class="feedback-form-textarea" placeholder="${candidate.name} will be a great fit for this role because..."></textarea>
-          </form>
-          <section class="candidate-container__contact">
-           <img class="contact-img" alt="recruiter thumbnail" src="assets/sourcer.png">
-           <span> &nbsp;Sourced by Jessica </span>
-          </section>
-        </footer>
+      //figure this out
+      $(`.candidate-container`).append(`
+      <div class="candidate-container__card" id="${index}">
+        <header class="candidate-container__header ">
+            <p class="candidate-header-text candidate-header-name"> ${candidate.name} </p>
+            <p class="candidate-header-text candidate-header-position"> ${candidate.currentTitle} at ${candidate.currentEmployer}</p>
+            <p class="candidate-header-text candidate-header-summary"> <img class="-header-img-locationmarker" src="assets/locationmarker.png"> ${candidate.location}</p>
+            <p class="candidate-header-text candidate-header-summary">Years of Experience <span class="candidate-header-summary-hilight">${candidate.yearsExperience} </span></p> 
+            <p class="candidate-header-text candidate-header-summary">Attended <span class="candidate-header-summary-hilight">${candidate.school} </span></p> 
+            <p class="candidate-header-text candidate-header-summary">${candidate.degree} in <span class="candidate-header-summary-hilight">${candidate.subject} </span></p> 
+            <p class="candidate-header-text candidate-header-summary">Worked at <span class="candidate-header-summary-hilight">${candidate.employmentHistory[0].employer}</span>&nbsp;and
+            <span class="candidate-header-summary-hilight">${candidate.employmentHistory[1].employer} </span></p> 
+            <div class="candidate-header-socialmedia">
+              <a href="https://github.com/ktso11"><img class="candidate-header-socialmedia-gitHub" alt="github thumbnail" src="assets/git.png"></a>
+              <a href="https://www.linkedin.com/in/katie-so/"><img class="candidate-header-socialmedia-linkedin"  alt="linkedin thumbnail" src="assets/linkedin.png"></a>
+            </div>
+          </header>
+          ${getHistory}
+          <footer class="candidate-container__footer ">
+            <form class="feedback-form" role="form">
+              <p class="feedback-form-title">Feedback</p>
+              <textarea class="feedback-form-textarea" placeholder="${candidate.name} will be a great fit for this role because..."></textarea>
+            </form>
+            <section class="candidate-container__contact">
+            <img class="contact-img" alt="recruiter thumbnail" src="assets/sourcer.png">
+            <span> &nbsp;Sourced by Jessica </span>
+            </section>
+          </footer>
+        </div>
       `)
     }
   }
+
+//seperation of concern 
+//string interpolation 
+//change keyword to skills
+//change variables to jquery everywhere 125... and more 
+//use variable caching
+//change fucntion to es6 - they will ask why you have es5 and 6 everywhere 
+//move functions that do not acess the DOM to before document ready <--google why
+//- - they might ask why I am hiding UI instead of using pages
+
 
   function appendDetails(employment){
     return  employment.map((el) => {
@@ -177,34 +194,6 @@ $(document).ready(function(){
     })
   }
 
-  function appendKeywords(keywords) {
-    return keywords.map((el) => (`<span class="candidate-employment-keywords">${el}</span>`)).join('');
-  }
-
-  // function appendDetails(currentCandidate){
-  //   for(i=0; i<currentCandidate.employmentHistory.length;i++){
-  //     const history = currentCandidate.employmentHistory[i]; //access the ram one time only 
-  //     const keywords = appendKeywords(history.keywords)
-  //     $('.candidate-container__card' ).append(`
-  //     <main class="candidate-container__employment">
-  //       <section class="candidate-employment">
-  //         <div class="candidate-employment__img">
-  //           <img alt="thumbnail of briefcase" src="assets/briefcase.png">
-  //         </div>
-  //         <div class="candidate-employment__content">
-  //           <p class="candidate-employment-position"> ${history.title}</p>
-  //           <p class="candidate-employment-summary"> ${history.employer}</p>
-  //           <p class="candidate-employment-summary"> ${history.dates}</p>
-  //           <div class="candidate-employment__keywords-container">
-  //             ${keywords}
-  //             <img class="candidate-employment-line" src="assets/line2.png">
-  //           </div>          
-  //         </div>
-  //       </section>
-  //     </main> 
-  //     `)
-  //   }
-  // }
 
 
 
@@ -226,22 +215,20 @@ $(document).ready(function(){
 
   function intEffect(move, currentIndex){
     click = click +1
-    $('.card-'+currentIndex).css('z-index',"5")
+    $('#'+currentIndex).css('z-index',"5")
     appendCard(click)
-    $('.card-'+currentIndex).addClass('candidate-card__slide'+move)
+    $('#'+currentIndex).addClass('candidate-card__slide'+move)
     setTimeout(function() {
-      $('.card-'+currentIndex).remove()
-    // why did i have this?...
-    //   setTimeout(function() {
-    //  }, 100);
-    }, 500);
+      $('#'+currentIndex).remove()
+    }, 700);
   }
 
-  //Decison Logic (based on user decision to Accept, Reject or Skip)  
+  //Decison Logic (based on user decision to Accept, Reject or Skip)  ***
   btnContainer.addEventListener('click', function(event) {
     //find the index of the card in display
-    let getIndex = document.getElementsByClassName('candidate-container__header')
-    let index = getIndex[0].id
+    let getIndex = document.getElementsByClassName('candidate-container__card')
+    let index = getIndex[getIndex.length-1].id //because I have a timer 
+    console.log(index)
     if(click === candidates.length) {
       //When out of candidates, remove buttons 
       $('.candidate-container__btn').hide()
@@ -316,6 +303,7 @@ $(document).ready(function(){
   // Show User's clicks throughout session 
   cards.addEventListener('click', function(event){
     $('.results').append(`User clicked on "${event.target.className}". <br>`)
+    console.log(acceptedCandidates)
   })
 
 
