@@ -1,4 +1,3 @@
-
 const candidates = [
   {
     name: 'Ellie Jo',
@@ -157,7 +156,6 @@ const appendCard = (index = 0) => {
           </footer>
         </div>
       `)
-
     }
   }
 
@@ -229,30 +227,37 @@ $(document).ready(function(){
   });
 
   let click = 0 
-  const animateSwipe = (...args) => {
+  // const animateSwipe = (...args) => {
+  //   click = click +1
+  //   $('#'+args[1]).css('z-index',"5")
+  //   appendCard(click)
+  //   $('#'+args[1]).addClass('candidate-card__slide'+args[0])
+  //   setTimeout(() => {
+  //     $('#'+args[1]).remove()
+  //     $('.screen').scrollTop(0)
+  //   }, 580);
+  // }
+
+  const animateSwipe = (direction, index) => {
     click = click +1
-    $('#'+args[1]).css('z-index',"5")
+    $('#'+index).css('z-index',"5")
     appendCard(click)
-    $('#'+args[1]).addClass('candidate-card__slide'+args[0])
+    $('#'+index).addClass('candidate-card__slide'+direction)
     setTimeout(() => {
-      $('#'+args[1]).remove()
+      $('#'+index).remove()
       $('.screen').scrollTop(0)
     }, 580);
   }
 
   cards.on('click', function(event){
     //Click on Campaign
-    if (event.target.className === "campaign-btn"){
-      appendCard(0)
+    if (event.target.className === "campagin-list-name-active"){
+      appendCard(click)
       $('.candidate-container__btn').removeClass('back-icon-fade')
-      click = 0 
     } 
     //Back to Campaign
     if (event.target.className === "bk-btn") {
       backtoDash()
-      // <img class="notification-svg" src="assets/noti-done.svg">
-
-
       $('.candidate-container').append(`
         <section class="candidate-container__card">
           <div class="home-container">
@@ -265,7 +270,6 @@ $(document).ready(function(){
               </div>
             </div>
             <section class="campaign-list">
-              <div class="campaign-list-col"></div>
               <div class="campagin-list-name">Frontend Engineer <p class="campagin-list-reviewdate">Last reviewed Sept 30</p></div>
               <div class="campaign-list-count">`+click+` <br>Reviewed</div> 
             </section>           
@@ -298,10 +302,9 @@ $(document).ready(function(){
                 <p class="notification-msg">You have <b>`+ reviewCount + ` candidates</b> to review</p>
               </div>
             </div>
-            <section class="campaign-btn campaign-list">
-              <div class="campaign-list-col2"></div>
-              <div class="campagin-list-name2">Frontend Engineer </div>
-              <div class="campaign-list-count2">
+            <section class="campaign-list">
+              <div class="campagin-list-name-active">Frontend Engineer </div>
+              <div class="campaign-list-count-active">
                 `+ reviewCount +`
                 <img class="countIcon"src="assets/counticon.png">
               </div> 

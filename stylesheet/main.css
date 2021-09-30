@@ -325,7 +325,7 @@ body {
   outline: none;
 }
 
-.bk-btn:hover{
+.bk-btn:active{
   background-color: #4CA5AE;
 }
 
@@ -395,18 +395,6 @@ body {
   position: absolute; 
   border: .5px #e8e8e9;
   border-style: solid none;
-
-}
-.campaign-list-col{
-  width: 12px;
-  height: 100%;
-  background-color: #CFD0D8;
-}
-
-.campaign-list-col2{
-  width: 12px;
-  height: 100%;
-  background-color: #70738A;
 }
 
 .campagin-list-name {
@@ -419,6 +407,7 @@ body {
   padding-left: var(--sm-med-spacing);
   font-size: 14px;
   font-weight: 800;
+  border-left: 16px solid #CFD0D8;
 }
 
 .campagin-list-reviewdate{
@@ -439,20 +428,21 @@ body {
   width: 100px;
 }
 
-.campagin-list-name2{
+.campagin-list-name-active{
   color:var(--dark-grey);
   width: 250px;
   display: flex;
+  font-weight: 800;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
   padding-left: var(--sm-med-spacing);
+  border-left: 16px solid #70738A;
   font-size: 14px;
-  /* font-weight: 800; */
 }
 
-.campaign-list-count2 {
-  font-size: 14px;
+.campaign-list-count-active {
+  font-size: 16px;
   font-weight: 800;
   text-align: center;
   color: var(--dark-grey);
