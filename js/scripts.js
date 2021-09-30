@@ -115,8 +115,8 @@ const appendCard = (index = 0) => {
   $('#nav-btn').attr({'src':"assets/backicon.png", "name":"backIcon"})
     if(candidates.length === index) {
       $('.candidate-container__btn').addClass('back-icon-fade')
-      $('.candidate-container').append(`<div class="candidate-container__card"></div>`)
-      $('.candidate-container__card').append(`
+      $('.candidate-container').append(`<div class="candidate-container-card"></div>`)
+      $('.candidate-container-card').append(`
         <section class="complete-container">
           <img src="assets/confetti.png">
           <p class="complete-container-text">You've completed all candidate reviews for this campaign. </p>
@@ -128,7 +128,7 @@ const appendCard = (index = 0) => {
       const candidate = candidates[index];
       const getHistory = appendDetails(candidate.employmentHistory)
       $(`.candidate-container`).append(`
-        <div class="candidate-container__card" id="${index}">
+        <div class="candidate-container-card" id="${index}">
           <header class="candidate-container__header">
             <p class="candidate-header-text candidate-header-name"> ${candidate.name} </p>
             <p class="candidate-header-text candidate-header-position"> ${candidate.currentTitle} at ${candidate.currentEmployer}</p>
@@ -165,7 +165,7 @@ const appendCard = (index = 0) => {
   
   const appendDetails = (employment) => {
     return  employment.map((el) => {
-      const skills = appendSkills(el.skills)
+      const getSkills = appendSkills(el.skills)
       return (
         `<main class="candidate-container__employment">
             <section class="candidate-employment">
@@ -177,7 +177,7 @@ const appendCard = (index = 0) => {
                 <p class="candidate-employment-summary"> ${el.employer}</p>
                 <p class="candidate-employment-summary"> ${el.dates}</p>
                 <div class="candidate-employment__skills-container">
-                  ${skills}
+                  ${getSkills}
                   <img class="candidate-employment-line" src="assets/line2.png">
                 </div>          
               </div>
@@ -206,13 +206,12 @@ $(document).ready(function(){
 
   //Decison Logic (based on user decision to Accept, Reject or Skip)  ***
   resultButton.on('click', function(event) {
-    let getIndex = $('.candidate-container__card')
+    let getIndex = $('.candidate-container-card')
     let index = getIndex[getIndex.length-1].id
     if(click === candidates.length) {
       $('.candidate-container__btn').hide()
     }
     if(click < candidates.length && event.target.id === "click-yes"){
-      console.log("clicked")
       acceptedCandidates.push(candidates[index].name)
       animateSwipe("right", index)
     }  
@@ -227,17 +226,6 @@ $(document).ready(function(){
   });
 
   let click = 0 
-  // const animateSwipe = (...args) => {
-  //   click = click +1
-  //   $('#'+args[1]).css('z-index',"5")
-  //   appendCard(click)
-  //   $('#'+args[1]).addClass('candidate-card__slide'+args[0])
-  //   setTimeout(() => {
-  //     $('#'+args[1]).remove()
-  //     $('.screen').scrollTop(0)
-  //   }, 580);
-  // }
-
   const animateSwipe = (direction, index) => {
     click = click +1
     $('#'+index).css('z-index',"5")
@@ -259,7 +247,7 @@ $(document).ready(function(){
     if (event.target.className === "bk-btn") {
       backtoDash()
       $('.candidate-container').append(`
-        <section class="candidate-container__card">
+        <section class="candidate-container-card">
           <div class="home-container">
             <img class="tf-logo" src="assets/tf.svg">
             <div class="notification-block">
@@ -292,7 +280,7 @@ $(document).ready(function(){
       backtoDash()
       let reviewCount = candidates.length - click
       $('.candidate-container').append(`
-        <section class="candidate-container__card">
+        <section class="candidate-container-card">
           <div class="home-container">
             <img class="tf-logo" src="assets/tf.svg">
             <div class="notification-block">
@@ -328,7 +316,7 @@ $(document).ready(function(){
 
   const backtoDash = () => {
     $('.candidate-container__btn').addClass('back-icon-fade')
-    $('.candidate-container__card').remove()
+    $('.candidate-container-card').remove()
     $('#nav-btn').attr({'src':"assets/avatar.svg", "name":"userIcon"})
   }
 
