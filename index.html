@@ -12,30 +12,29 @@
   </head>
 
   <body>
-
-    <div class="results"></div>
+    <div class="results"></div> 
     <main class="frame">
-       
       <div class="screen">
         <header class="screen-upper">
           <img  src="assets/meta.png">
-          
-
           <nav>
-            <img class="back-icon" id="nav-btn" src="assets/backicon.png">
+            <img class="back-icon" id="nav-btn" name="userIcon" src="assets/backicon.png">
           </nav>
         </header> 
         
         <div id="candidate-container__btn" class="candidate-container__btn">
-          <div class="btn-yes" id="click-yes" role="button"> <img id="click-yes" class="btn-img-yes " src="assets/check.png"></div>
+          <div class="btn-no " id="click-no" role="button"> <img id="click-no" class="btn-img-no click-no" src="assets/cross.png"> </div> 
           <div class="btn-skip" id="click-skip" role="button"> <img id="click-skip"  class="btn-img-skip" src="assets/skip.png"> </div>
-          <div class="btn-no " id="click-no" role="button"> <img id="click-no" class="btn-img-no click-no" src="assets/cross.png"> </div>  
+          <div class="btn-yes" id="click-yes" role="button"> <img id="click-yes" class="btn-img-yes " src="assets/check.png"></div>
         </div>
-        <section class="user-menu"><img  src="assets/usermenu.png"></section>
+        
         <section class="candidate-container">
-          
+
+          <section class="user-menu">
+            <img class="menu-img" src="assets/usermenu.png">
+          </section>
+          <div class="black-screen"></div>
         </section>
-      <!-- </div><div class="frame-border"></div> -->
     </main>
    
     <script src="js/scripts.js"></script>
